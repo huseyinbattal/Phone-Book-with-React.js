@@ -1,4 +1,4 @@
-# How does it looks?
+# How does it look?
 
 Phone-Book Application with React.
 Tecnologies i use React(props and states).
