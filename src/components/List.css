@@ -16,14 +16,20 @@ ul,li{
     margin: 0;
     padding: 0;
     list-style-type: none;
+    font-size: large;
+    font-weight: bold;
 }
 
 .listField li{
     padding: 5px;
     background-color: #f8f8f8;
-    color: black;
+    color: orangered;
     border-bottom: 1px solid #f1f1f1;
     clear: both;
+    font-family: "Poppins";
+    font-size: large;
+    font-weight: bold;
+
 }
 
 .listField li span{
@@ -36,4 +42,11 @@ ul,li{
 
 .listField li span.phone{
     float: right;
+}
+input{
+    background-color: blanchedalmond;
+    border-radius: 15px;
+    color:rgb(53, 14, 101);
+    font-size: large;
+    font-weight: bold;
 }

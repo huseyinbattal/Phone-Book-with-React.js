@@ -1,7 +1,9 @@
+import { Button } from "react-bootstrap";
 import React, { Component } from "react";
+import AlertComp from "./AlertComp";
 
 export default class Form extends Component {
-  state = { name: "", phone: "" };
+  state = { name: "", phone: "", i: 0 };
   /*constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
@@ -16,8 +18,18 @@ export default class Form extends Component {
     }
       
   }*/
-    render() {
-      const onChangeFunc=(e)=>{this.setState({[e.target.name]:e.target.value})}
+  render() {
+    const onChangeFunc = (e) => {
+      this.setState({ [e.target.name]: e.target.value });
+      this.setState({ i: 0 });
+    };
+    const buttonStyle = {
+      width: "30%",
+      marginTop: "30px",
+      marginBottom: "10px",
+      marginLeft:"5px"
+}
+
     const formInputStyle = {
       marginTop: "10px",
       height: "30px",
@@ -25,20 +37,25 @@ export default class Form extends Component {
       width: "400px",
       textIndent: "10px",
     };
-      console.log(this.props)
-      const onSubmitFunc = (event) => {
-        event.preventDefault();
-  if (this.state.name==="" || this.state.phone==="") {
-    alert("Name or phone not be blank!!!")
-  } else {
-    console.log("Form onSubmit FUNC-CHILD")
-    this.props.addContact({ ...this.state })
-    this.setState({name:"",phone:""})
-  }
+    console.log(this.props);
+  
+    const onSubmitFunc = (event) => {
+      event.preventDefault();
+      if (this.state.name === "" || this.state.phone === "") {
+        this.setState({ i: 1 });
+      } else {
+        console.log("Form onSubmit FUNC-CHILD");
+        this.props.addContact({ ...this.state });
+        this.setState({ name: "", phone: "" });
+        this.setState({ i: 0 });
       }
+    };
     return (
       <div>
-        <form onSubmit={onSubmitFunc} style={{ width: "400px", margin: "0 auto", padding: "0" }}>
+        <form
+          onSubmit={onSubmitFunc}
+          style={{ width: "400px", margin: "0 auto", padding: "0" }}
+        >
           <input
             style={formInputStyle}
             name="name"
@@ -56,7 +73,22 @@ export default class Form extends Component {
             value={this.state.phone}
             onChange={onChangeFunc}
           ></input>
-          <button style={{marginTop:"10px"}} type="submit">Add</button>
+          <div>{this.state.i === 1 ? <AlertComp /> : ""}</div>
+          <Button
+            style={buttonStyle}
+            className="btn btn-success"
+            type="submit"
+          >
+            Add
+          </Button>
+
+          <Button
+            className="btn btn-danger"
+            style={buttonStyle}
+          onClick={this.props.deleteList}
+          >
+            Clear All
+          </Button>
         </form>
       </div>
     );
